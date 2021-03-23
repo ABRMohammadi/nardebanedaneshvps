@@ -26,6 +26,7 @@ jobs:
         Invoke-WebRequest https://github.com/ABRMohammadi/nardebanedaneshvps/tree/main/Files/NGROK-AP.bat -OutFile NGROK-AP.bat
         Invoke-WebRequest https://github.com/ABRMohammadi/nardebanedaneshvps/tree/main/Files/NGROK-CHECK.bat -OutFile NGROK-CHECK.bat
         Invoke-WebRequest https://github.com/ABRMohammadi/nardebanedaneshvps/tree/main/Files/loop.bat -OutFile loop.bat
+        Invoke-WebRequest https://github.com/ABRMohammadi/nardebanedaneshvps/tree/main/Files/CMD.bat -OutFile CMD.bat
     - name: Make YML file for NGROK.
       run: start NGROK-AP.bat
     - name: Enable RDP Access.
@@ -34,7 +35,7 @@ jobs:
         Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
         Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
     - name: Create Tunnel
-      run: sc start ngrok
+      run: cmd /c CMD.bat
     - name: Connect to your RDP 2core-7GB Ram.
       run: cmd /c NGROK-CHECK.bat
     - name: All Done! You can close Tab now! Maximum VM time:6h.
